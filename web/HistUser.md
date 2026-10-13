@@ -53,3 +53,21 @@ HU4 — Dar de baja usuarios
 -        Quiero desactivar cuentas de usuario que ya no pertenecen a la institución
 
 -        Para impedir que accedan al sistema aunque tengan una cuenta Válida.
+
+HU5 — Creación y Visualización del menú
+
+-        Como empleado
+
+-        Quiero visualizar el menú creado del día por el administrador con anticipación
+
+-        Para decidir mi reserva con tiempo.
+
+Criterios de aceptación:
+
+-        Caso éxito: Dado que el sistema tiene cargado el menú de toda la semana, cuando llega la hora y fecha configurada, entonces el empleado puede visualizar el menú disponible.
+
+-        Caso actualización: Dado que llega la hora configurada, cuando el reloj pasa dicha hora, entonces el sistema actualiza automáticamente el menú de la semana y el empleado puede consultarlo.
+
+-        Caso error: Dado que el menú no está cargado, cuando el empleado intenta visualizarlo, entonces el sistema muestra un mensaje de “menú no disponible”.
+
+-        Caso restricción: Dado que el menú solo puede visualizarse hasta cierta fecha y hora (ej. 08:30 Viernes), cuando el empleado intenta acceder después de esa fecha y hora, entonces el sistema bloquea la visualización y muestra un mensaje de “fuera de horario”.
