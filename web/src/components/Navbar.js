@@ -8,7 +8,8 @@ import {
   LogOut, 
   ShieldCheck, 
   Sparkles,
-  Layers
+  Layers,
+  Calendar
 } from 'lucide-react';
 
 export default function Navbar({ activeTab, setActiveTab }) {
@@ -30,18 +31,21 @@ export default function Navbar({ activeTab, setActiveTab }) {
   const navItems = isAdmin
     ? [
         { id: 'usuarios', label: 'Usuarios', icon: Users, badge: 'Admin' },
+        { id: 'calendario', label: 'Excepciones', icon: Calendar },
         { id: 'cuenta', label: 'Mi Cuenta', icon: UserCheck },
         { id: 'menu', label: 'Crear Menú', icon: UtensilsCrossed },
         { id: 'reportes', label: 'Reportes', icon: BarChart3 },
       ]
     : [
         { id: 'portal', label: 'Mi Panel', icon: Layers },
+        { id: 'calendario', label: 'Calendario', icon: Calendar },
         { id: 'cuenta', label: 'Mi Cuenta', icon: UserCheck },
         { id: 'menu', label: 'Ver Menú', icon: UtensilsCrossed },
       ];
 
-  const displayName = profile?.nombres
-    ? `${profile.nombres} ${profile.apellidos || ''}`
+  const firstName = profile?.nombre || profile?.nombres;
+  const displayName = firstName
+    ? `${firstName} ${profile.apellidos || ''}`.trim()
     : user?.email?.split('@')[0] || 'Usuario';
 
   return (
@@ -56,9 +60,6 @@ export default function Navbar({ activeTab, setActiveTab }) {
             <div>
               <div className="flex items-center space-x-2">
                 <span className="font-bold text-lg tracking-tight">Restaurante Cielo</span>
-                <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-500/40 text-blue-100 border border-blue-400/30">
-                  <Sparkles className="w-3 h-3 mr-1 text-yellow-300" /> Sistema
-                </span>
               </div>
               <p className="text-xs text-blue-100/80 -mt-0.5">Gestión Institucional</p>
             </div>

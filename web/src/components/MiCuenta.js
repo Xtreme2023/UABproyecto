@@ -35,7 +35,7 @@ export default function MiCuenta() {
 
   useEffect(() => {
     if (profile) {
-      setNombres(profile.nombres || '');
+      setNombres(profile.nombre || profile.nombres || '');
       setApellidos(profile.apellidos || '');
       setTelefono(profile.telefono || '');
     }
@@ -60,12 +60,14 @@ export default function MiCuenta() {
       setSavingProfile(true);
       if (user?.id) {
         await updateUserProfile(user.id, {
+          nombre: nombres.trim(),
           nombres: nombres.trim(),
           apellidos: apellidos.trim(),
           telefono: telefono.trim(),
         });
         setProfile((prev) => ({
           ...prev,
+          nombre: nombres.trim(),
           nombres: nombres.trim(),
           apellidos: apellidos.trim(),
           telefono: telefono.trim(),
@@ -131,7 +133,7 @@ export default function MiCuenta() {
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white p-6 text-center relative">
           <div className="w-16 h-16 rounded-full bg-white/15 text-white font-bold text-2xl flex items-center justify-center mx-auto mb-2 border-2 border-white/30 shadow-inner">
-            {(profile?.nombres?.charAt(0) || user?.email?.charAt(0) || 'U').toUpperCase()}
+            {(profile?.nombre?.charAt(0) || profile?.nombres?.charAt(0) || user?.email?.charAt(0) || 'U').toUpperCase()}
           </div>
           <h2 className="text-xl font-bold">Mi Cuenta</h2>
           <p className="text-blue-100 text-xs mt-0.5 font-medium">

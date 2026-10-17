@@ -15,8 +15,9 @@ import {
 export default function NonAdminPortal({ setActiveTab }) {
   const { profile, user, role } = useAuth();
 
-  const displayName = profile?.nombres
-    ? `${profile.nombres} ${profile.apellidos || ''}`
+  const firstName = profile?.nombre || profile?.nombres;
+  const displayName = firstName
+    ? `${firstName} ${profile.apellidos || ''}`.trim()
     : user?.email?.split('@')[0] || 'Usuario';
 
   return (
@@ -47,7 +48,7 @@ export default function NonAdminPortal({ setActiveTab }) {
             ¡Bienvenido(a), {displayName}!
           </h1>
           <p className="text-blue-100 text-sm mt-2 max-w-xl">
-            Aquí puedes consultar el menú semanal planificado para los almuerzos, revisar tus datos personales y gestionar tu cuenta.
+            Aquí puedes consultar el menú semanal planificado para los almuerzos, revisar los días de no atención en el calendario y gestionar tu cuenta.
           </p>
 
           <div className="mt-5 flex flex-wrap gap-3">
@@ -57,6 +58,13 @@ export default function NonAdminPortal({ setActiveTab }) {
             >
               <Utensils className="w-4 h-4" />
               <span>Ver Menú Semanal</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('calendario')}
+              className="px-4 py-2.5 bg-rose-600/80 hover:bg-rose-600 text-white font-medium rounded-xl text-sm border border-rose-400/30 transition flex items-center space-x-2 shadow-xs"
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Días de No Atención</span>
             </button>
             <button
               onClick={() => setActiveTab('cuenta')}

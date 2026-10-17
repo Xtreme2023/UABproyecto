@@ -50,7 +50,7 @@ export function AuthProvider({ children }) {
   async function fetchProfile(userId) {
     try {
       const { data, error } = await supabase
-        .from('usuario')
+        .from('vista_usuarios')
         .select('*')
         .eq('id_usuario', userId)
         .maybeSingle();

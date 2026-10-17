@@ -7,6 +7,7 @@ import NonAdminPortal from './components/NonAdminPortal';
 import MiCuenta from './components/MiCuenta';
 import CrearMenu from './components/CrearMenu';
 import Reportes from './components/Reportes';
+import CalendarioSection from './components/calendario/CalendarioSection';
 import { UtensilsCrossed } from 'lucide-react';
 
 function AppContent() {
@@ -31,7 +32,7 @@ function AppContent() {
           <UtensilsCrossed className="w-8 h-8 text-blue-400" />
         </div>
         <div className="w-8 h-8 border-3 border-blue-500 border-t-transparent rounded-full animate-spin mb-3" />
-        <p className="text-sm font-medium text-slate-400">Iniciando Restaurante Gourmet...</p>
+        <p className="text-sm font-medium text-slate-400">Iniciando Restaurante Cielo...</p>
       </div>
     );
   }
@@ -43,10 +44,10 @@ function AppContent() {
 
   // Logged in -> Render Top Navbar + View according to activeTab and role permissions
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen w-screen bg-slate-50 flex flex-col">
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <main className="flex-1 pb-12">
+      <main className="flex-1 pb-16">
         {activeTab === 'usuarios' && (
           isAdmin ? (
             <UsuariosList />
@@ -56,6 +57,7 @@ function AppContent() {
         )}
 
         {activeTab === 'portal' && <NonAdminPortal setActiveTab={setActiveTab} />}
+        {activeTab === 'calendario' && <CalendarioSection />}
         {activeTab === 'cuenta' && <MiCuenta />}
         {activeTab === 'menu' && <CrearMenu />}
         {activeTab === 'reportes' && <Reportes />}
@@ -63,7 +65,7 @@ function AppContent() {
 
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400">
-        <p>© 2026 Restaurante Gourmet - Sistema de Gestión Institucional</p>
+        <p>© 2026 Restaurante Cielo</p>
       </footer>
     </div>
   );

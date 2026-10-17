@@ -71,3 +71,35 @@ Criterios de aceptación:
 -        Caso error: Dado que el menú no está cargado, cuando el empleado intenta visualizarlo, entonces el sistema muestra un mensaje de “menú no disponible”.
 
 -        Caso restricción: Dado que el menú solo puede visualizarse hasta cierta fecha y hora (ej. 08:30 Viernes), cuando el empleado intenta acceder después de esa fecha y hora, entonces el sistema bloquea la visualización y muestra un mensaje de “fuera de horario”.
+
+HU6 — Preferencias de menú
+
+-        Como empleado
+
+-        Quiero marcar platos del menú como favoritos
+
+-        Para que el sistema guarde mis preferencias y me sugiera opciones en futuras reservas.
+
+Criterios de aceptación:
+
+-        Caso éxito: Dado que el empleado selecciona un plato como favorito, cuando confirma, entonces el sistema guarda esa preferencia en su perfil.
+
+-        Caso sugerencia: Dado que el empleado consulta el menú de otra fecha, cuando el sistema carga opciones, entonces muestra primero los platos marcados como favoritos.
+
+-        Caso actualización: Dado que el empleado cambia sus preferencias, cuando elimina o agrega favoritos, entonces el sistema actualiza su perfil correctamente.
+
+HU7 — Control de días de atención disponibles
+
+-        Como empleado
+
+-        Quiero visualizar los días en que el restaurante ofrece servicio
+
+-        Para reservar únicamente en fechas válidas.
+
+Criterios de aceptación:
+
+-        Caso éxito: Dado que el calendario está configurado, cuando intenta reservar en día habilitado, entonces el sistema confirma.
+
+-        Caso error: Dado que intenta reservar en día no habilitado, cuando solicita, entonces el sistema rechaza y muestra mensaje de disponibilidad.
+
+-        Caso error: Dado que el dia es feriado por motivos desconocidos para el sistema o la planificación el sistema rechaza las reservas de ese día.

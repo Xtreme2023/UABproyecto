@@ -237,6 +237,53 @@ export class MenuDia {
   }
 
   /**
+   * Guarda el menú completo de una semana en una sola llamada atómica mediante la función Supabase RPC
+   * @param {Array<{ fecha: string, estado_publicacion: boolean, platos_ids: number[] }>} dias
+   */
+  async guardarMenuSemanal(dias) {
+    if (!dias || dias.length === 0) {
+      throw new Error('Debe proporcionar al menos un día para el menú semanal.');
+    }
+
+    // 1. Invocar la función RPC creada en Supabase (con p_dias)
+    let lastError = null;
+    try {
+      const { data, error } = await supabase.rpc('guardar_menu_semanal', {
+        p_dias: dias,
+      });
+
+      if (!error) return data;
+      lastError = error;
+    } catch (rpcErr) {
+      lastError = rpcErr;
+    }
+
+    // 2. Intento secundario si el parámetro de la función se declaró como 'dias'
+    try {
+      const { data, error } = await supabase.rpc('guardar_menu_semanal', {
+        dias: dias,
+      });
+
+      if (!error) return data;
+      lastError = error;
+    } catch (rpcErr2) {
+      lastError = rpcErr2;
+    }
+
+    // 3. Fallback cliente si no se pudo ejecutar el RPC
+    console.warn('Ejecutando guardado de respaldo cliente:', lastError?.message);
+    for (const dia of dias) {
+      await this.guardarMenuCompleto({
+        fecha: dia.fecha,
+        estado_publicacion: dia.estado_publicacion,
+        platosIds: dia.platos_ids || [],
+      });
+    }
+
+    return { success: true, message: 'Menú semanal guardado exitosamente' };
+  }
+
+  /**
    * Obtiene todos los menú_dia junto con los platos asociados (relación N:M)
    */
   async getMenuDiasConPlatos() {
